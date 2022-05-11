@@ -16,4 +16,4 @@ jobs:
         uses: dglaeser/action-field-compare@4da77b9f8b6b9cde36db97e2659f8d05cbeed8a0
         with:
           file: "test_file.csv"
-          reference_file: "test_reference_file.csv"
+          reference-file: "test_reference_file.csv"
