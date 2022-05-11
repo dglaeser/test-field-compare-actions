@@ -1,0 +1,19 @@
+on: [push]
+
+jobs:
+  test-file-field-compare:
+    runs-on: ubuntu-latest
+    name: test-csv-files
+    steps:
+      - name: prepare-test-csv-files
+        run: |
+          echo "field1,field2,field3" > test_file.csv
+          echo "0.0,1.0,2.0" >> test_file.csv
+          echo "field1,field2,field3" > test_reference_file.csv
+          echo "1e-8,1.0,2.0" >> test_reference_file.csv
+      
+      - compare_test_files:
+        uses: actions/action-field-compare
+        with:
+          file: "test_file.csv"
+          reference_file: "test_reference_file.csv"
