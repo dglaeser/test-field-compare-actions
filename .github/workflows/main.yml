@@ -12,7 +12,7 @@ jobs:
           echo "field1,field2,field3" > test_reference_file.csv
           echo "1e-8,1.0,2.0" >> test_reference_file.csv
       
-      - compare_test_files:
+      - name: compare_test_files
         uses: actions/action-field-compare@81551e1
         with:
           file: "test_file.csv"
