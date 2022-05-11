@@ -13,7 +13,7 @@ jobs:
           echo "1e-8,1.0,2.0" >> test_reference_file.csv
       
       - name: compare_test_files
-        uses: dglaeser/action-field-compare@4da77b9f8b6b9cde36db97e2659f8d05cbeed8a0
+        uses: dglaeser/action-field-compare@9c76587d3426e2b91eb73567e30967ce312ca18e
         with:
           file: "test_file.csv"
           reference-file: "test_reference_file.csv"
