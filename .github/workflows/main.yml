@@ -10,7 +10,7 @@ jobs:
           echo "field1,field2,field3" > test_file.csv
           echo "0.0,1.0,2.0" >> test_file.csv
           echo "field1,field2,field3" > test_reference_file.csv
-          echo "1e-8,1.0,2.0" >> test_reference_file.csv
+          echo "1e-12,1.0,2.0" >> test_reference_file.csv
       
       - name: compare_test_files
         uses: dglaeser/action-field-compare@9c76587d3426e2b91eb73567e30967ce312ca18e
