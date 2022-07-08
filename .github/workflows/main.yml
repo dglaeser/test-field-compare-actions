@@ -11,9 +11,36 @@ jobs:
           echo "0.0,1.0,2.0" >> test_file.csv
           echo "field1,field2,field3" > test_reference_file.csv
           echo "1e-12,1.0,2.0" >> test_reference_file.csv
-      
-      - name: compare_test_files
-        uses: dglaeser/action-field-compare@9c76587d3426e2b91eb73567e30967ce312ca18e
+
+      - name: compare_local_generated_test_files
+        uses: dglaeser/action-field-compare@f1a212be19c91dc53488ff06342f81effff14998
         with:
           file: "test_file.csv"
           reference-file: "test_reference_file.csv"
+
+      - name: get-repo
+        uses: actions/checkout@v3
+
+      - name: compare_local_preexisting_test_files
+        uses: dglaeser/action-field-compare@f1a212be19c91dc53488ff06342f81effff14998
+        with:
+          file: "data/test_data.csv"
+          reference-file: "data/test_data_perturbed.csv"
+
+      - name: compare_test_files_from_urls
+        uses: dglaeser/action-field-compare@f1a212be19c91dc53488ff06342f81effff14998
+        with:
+          file: "https://raw.githubusercontent.com/dglaeser/test-field-compare-actions/feature/test-data-from-urls/data/test_data.csv"
+          reference-file: "https://raw.githubusercontent.com/dglaeser/test-field-compare-actions/feature/test-data-from-urls/data/test_data_perturbed.csv"
+
+      - name: compare_local_test_file_against_url_reference
+        uses: dglaeser/action-field-compare@f1a212be19c91dc53488ff06342f81effff14998
+        with:
+          file: "data/test_data.csv"
+          reference-file: "https://raw.githubusercontent.com/dglaeser/test-field-compare-actions/feature/test-data-from-urls/data/test_data_perturbed.csv"
+
+      - name: compare_remote_test_file_against_local_reference
+        uses: dglaeser/action-field-compare@f1a212be19c91dc53488ff06342f81effff14998
+        with:
+          file: "https://raw.githubusercontent.com/dglaeser/test-field-compare-actions/feature/test-data-from-urls/data/test_data.csv"
+          reference-file: "data/test_data_perturbed.csv"
