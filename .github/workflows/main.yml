@@ -1,5 +1,8 @@
 on: [push]
 
+env:
+  TEST_DATA_BASE_URL: https://raw.githubusercontent.com/dglaeser/test-field-compare-actions/1be13469e951c997272049eb832ab0de9d48f989/data
+
 jobs:
   test-file-field-compare:
     runs-on: ubuntu-latest
@@ -24,17 +27,17 @@ jobs:
       - name: compare_test_files_from_urls
         uses: dglaeser/action-field-compare@f1a212be19c91dc53488ff06342f81effff14998
         with:
-          file: "https://raw.githubusercontent.com/dglaeser/test-field-compare-actions/1be13469e951c997272049eb832ab0de9d48f989/data/test_data.csv"
-          reference-file: "https://raw.githubusercontent.com/dglaeser/test-field-compare-actions/1be13469e951c997272049eb832ab0de9d48f989/data/test_data_perturbed.csv"
+          file: "${{ env.TEST_DATA_BASE_URL }}/test_data.csv"
+          reference-file: "${{ env.TEST_DATA_BASE_URL }}/test_data_perturbed.csv"
 
       - name: compare_local_test_file_against_url_reference
         uses: dglaeser/action-field-compare@f1a212be19c91dc53488ff06342f81effff14998
         with:
           file: "data/test_data.csv"
-          reference-file: "https://raw.githubusercontent.com/dglaeser/test-field-compare-actions/1be13469e951c997272049eb832ab0de9d48f989/data/test_data_perturbed.csv"
+          reference-file: "${{ env.TEST_DATA_BASE_URL }}/test_data_perturbed.csv"
 
       - name: compare_remote_test_file_against_local_reference
         uses: dglaeser/action-field-compare@f1a212be19c91dc53488ff06342f81effff14998
         with:
-          file: "https://raw.githubusercontent.com/dglaeser/test-field-compare-actions/1be13469e951c997272049eb832ab0de9d48f989/data/test_data.csv"
+          file: "${{ env.TEST_DATA_BASE_URL }}/test_data.csv"
           reference-file: "data/test_data_perturbed.csv"
