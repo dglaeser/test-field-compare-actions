@@ -1,5 +1,8 @@
 on: [push]
 
+env:
+  TEST_DATA_BASE_URL: https://raw.githubusercontent.com/dglaeser/test-field-compare-actions/1be13469e951c997272049eb832ab0de9d48f989/data
+
 jobs:
   test-file-field-compare:
     runs-on: ubuntu-latest
@@ -11,9 +14,30 @@ jobs:
           echo "0.0,1.0,2.0" >> test_file.csv
           echo "field1,field2,field3" > test_reference_file.csv
           echo "1e-12,1.0,2.0" >> test_reference_file.csv
-      
-      - name: compare_test_files
-        uses: dglaeser/action-field-compare@9c76587d3426e2b91eb73567e30967ce312ca18e
+
+      - name: compare_local_generated_test_files
+        uses: dglaeser/action-field-compare@f1a212be19c91dc53488ff06342f81effff14998
         with:
           file: "test_file.csv"
           reference-file: "test_reference_file.csv"
+
+      - name: get-repo
+        uses: actions/checkout@v3
+
+      - name: compare_test_files_from_urls
+        uses: dglaeser/action-field-compare@f1a212be19c91dc53488ff06342f81effff14998
+        with:
+          file: "${{ env.TEST_DATA_BASE_URL }}/test_data.csv"
+          reference-file: "${{ env.TEST_DATA_BASE_URL }}/test_data_perturbed.csv"
+
+      - name: compare_local_test_file_against_url_reference
+        uses: dglaeser/action-field-compare@f1a212be19c91dc53488ff06342f81effff14998
+        with:
+          file: "data/test_data.csv"
+          reference-file: "${{ env.TEST_DATA_BASE_URL }}/test_data_perturbed.csv"
+
+      - name: compare_remote_test_file_against_local_reference
+        uses: dglaeser/action-field-compare@f1a212be19c91dc53488ff06342f81effff14998
+        with:
+          file: "${{ env.TEST_DATA_BASE_URL }}/test_data.csv"
+          reference-file: "data/test_data_perturbed.csv"
