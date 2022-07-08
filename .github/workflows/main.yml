@@ -21,12 +21,6 @@ jobs:
       - name: get-repo
         uses: actions/checkout@v3
 
-      - name: compare_local_preexisting_test_files
-        uses: dglaeser/action-field-compare@f1a212be19c91dc53488ff06342f81effff14998
-        with:
-          file: "data/test_data.csv"
-          reference-file: "data/test_data_perturbed.csv"
-
       - name: compare_test_files_from_urls
         uses: dglaeser/action-field-compare@f1a212be19c91dc53488ff06342f81effff14998
         with:
