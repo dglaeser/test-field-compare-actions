@@ -16,7 +16,7 @@ jobs:
           echo "1e-12,1.0,2.0" >> test_reference_file.csv
 
       - name: compare_local_generated_test_files
-        uses: dglaeser/action-field-compare@f1a212be19c91dc53488ff06342f81effff14998
+        uses: dglaeser/action-field-compare@0f20588ab363cab442c4789d8eb05d0d33102983
         with:
           file: "test_file.csv"
           reference-file: "test_reference_file.csv"
@@ -25,19 +25,19 @@ jobs:
         uses: actions/checkout@v3
 
       - name: compare_test_files_from_urls
-        uses: dglaeser/action-field-compare@f1a212be19c91dc53488ff06342f81effff14998
+        uses: dglaeser/action-field-compare@0f20588ab363cab442c4789d8eb05d0d33102983
         with:
           file: "${{ env.TEST_DATA_BASE_URL }}/test_data.csv"
           reference-file: "${{ env.TEST_DATA_BASE_URL }}/test_data_perturbed.csv"
 
       - name: compare_local_test_file_against_url_reference
-        uses: dglaeser/action-field-compare@f1a212be19c91dc53488ff06342f81effff14998
+        uses: dglaeser/action-field-compare@0f20588ab363cab442c4789d8eb05d0d33102983
         with:
           file: "data/test_data.csv"
           reference-file: "${{ env.TEST_DATA_BASE_URL }}/test_data_perturbed.csv"
 
       - name: compare_remote_test_file_against_local_reference
-        uses: dglaeser/action-field-compare@f1a212be19c91dc53488ff06342f81effff14998
+        uses: dglaeser/action-field-compare@0f20588ab363cab442c4789d8eb05d0d33102983
         with:
           file: "${{ env.TEST_DATA_BASE_URL }}/test_data.csv"
           reference-file: "data/test_data_perturbed.csv"
