@@ -14,26 +14,33 @@ jobs:
           echo "field1,field2,field3" > test_reference_file_high_deviation.csv
           echo "1e-3,1.0,2.0" >> test_reference_file_high_deviation.csv
 
-      - name: compare_local_generated_test_files
+      - name: compare-test-files
         uses: dglaeser/action-field-compare@142227fc3744d78caf9e05e95465ed9dac05871f
         with:
           result: "test_file.csv"
           reference: "test_reference_file.csv"
 
-      - name: compare_with_low_tolerance
+      - name: compare-with-high-tolerance
         uses: dglaeser/action-field-compare@142227fc3744d78caf9e05e95465ed9dac05871f
         with:
           result: "test_file.csv"
           reference: "test_reference_file_high_deviation.csv"
           tolerance-options: "-rtol 1e-2 -atol 1e-2"
 
-      - name: get-repo
-        uses: actions/checkout@v3
+      - name: prepare-test-folders
+        run: |
+          mkdir test_data && cp test_file.csv test_data
+          mkdir reference_data && cp test_reference_file_high_deviation.csv reference_data/test_file.csv
 
-      - name: compare_folders
+      - name: compare-folders
         uses: dglaeser/action-field-compare@142227fc3744d78caf9e05e95465ed9dac05871f
         with:
-          result: "data"
-          reference: "data"
+          result: "test_data"
+          reference: "test_data"
 
-
+      - name: compare-folders-with-high-tolerance
+        uses: dglaeser/action-field-compare@142227fc3744d78caf9e05e95465ed9dac05871f
+        with:
+          result: "test_data"
+          reference: "reference_data"
+          tolerance-options: "-rtol 1e-2 -atol 1e-2"
