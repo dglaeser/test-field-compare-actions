@@ -17,41 +17,41 @@ jobs:
           echo "1e-12,1.0" >> test_reference_file_missing_field.csv
 
       - name: compare-test-files
-        uses: dglaeser/action-field-compare@95a036b3da8167d1fe5289d0125c41c72978de16
+        uses: dglaeser/action-field-compare@v1.0
         with:
           result: "test_file.csv"
           reference: "test_reference_file.csv"
 
       - name: compare-with-high-tolerance
-        uses: dglaeser/action-field-compare@95a036b3da8167d1fe5289d0125c41c72978de16
+        uses: dglaeser/action-field-compare@v1.0
         with:
           result: "test_file.csv"
           reference: "test_reference_file_high_deviation.csv"
           cli-options: "-rtol 1e-2 -atol 1e-2"
 
       - name: compare-with-ignoring-missing-reference-field
-        uses: dglaeser/action-field-compare@95a036b3da8167d1fe5289d0125c41c72978de16
+        uses: dglaeser/action-field-compare@v1.0
         with:
           result: "test_file.csv"
           reference: "test_reference_file_missing_field.csv"
           cli-options: "--ignore-missing-reference-fields"
 
       - name: compare-with-ignoring-missing-results-field
-        uses: dglaeser/action-field-compare@95a036b3da8167d1fe5289d0125c41c72978de16
+        uses: dglaeser/action-field-compare@v1.0
         with:
           result: "test_reference_file_missing_field.csv"
           reference: "test_file.csv"
           cli-options: "--ignore-missing-result-fields"
 
       - name: compare-with-excluded-fields
-        uses: dglaeser/action-field-compare@95a036b3da8167d1fe5289d0125c41c72978de16
+        uses: dglaeser/action-field-compare@v1.0
         with:
           result: "test_file.csv"
           reference: "test_reference_file_high_deviation.csv"
           cli-options: "--exclude-fields field1"
 
       - name: compare-selected-fields
-        uses: dglaeser/action-field-compare@95a036b3da8167d1fe5289d0125c41c72978de16
+        uses: dglaeser/action-field-compare@v1.0
         with:
           result: "test_file.csv"
           reference: "test_reference_file_high_deviation.csv"
@@ -70,34 +70,34 @@ jobs:
           cp reference_data_additional_files/test_file.csv reference_data_additional_files/test_file_3.csv
 
       - name: compare-folders
-        uses: dglaeser/action-field-compare@95a036b3da8167d1fe5289d0125c41c72978de16
+        uses: dglaeser/action-field-compare@v1.0
         with:
           result: "test_data"
           reference: "test_data"
 
       - name: compare-folders-with-high-tolerance
-        uses: dglaeser/action-field-compare@95a036b3da8167d1fe5289d0125c41c72978de16
+        uses: dglaeser/action-field-compare@v1.0
         with:
           result: "test_data"
           reference: "reference_data"
           cli-options: "-rtol 1e-2 -atol 1e-2"
 
       - name: compare-folders-with-file-inclusion-filter
-        uses: dglaeser/action-field-compare@95a036b3da8167d1fe5289d0125c41c72978de16
+        uses: dglaeser/action-field-compare@v1.0
         with:
           result: "test_data"
           reference: "reference_data"
           cli-options: "--include-files test_file.csv"
 
       - name: compare-folders-with-ignoring-missing-result-files
-        uses: dglaeser/action-field-compare@95a036b3da8167d1fe5289d0125c41c72978de16
+        uses: dglaeser/action-field-compare@v1.0
         with:
           result: "test_data"
           reference: "reference_data_additional_files"
           cli-options: "--ignore-missing-result-files -rtol 1e-2 -atol 1e-2"
 
       - name: compare-folders-with-ignoring-missing-reference-files
-        uses: dglaeser/action-field-compare@95a036b3da8167d1fe5289d0125c41c72978de16
+        uses: dglaeser/action-field-compare@v1.0
         with:
           result: "reference_data_additional_files"
           reference: "test_data"
