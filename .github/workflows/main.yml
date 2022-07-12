@@ -43,6 +43,20 @@ jobs:
           reference: "test_file.csv"
           cli-options: "--ignore-missing-result-fields"
 
+      - name: compare-with-excluded-fields
+        uses: dglaeser/action-field-compare@95a036b3da8167d1fe5289d0125c41c72978de16
+        with:
+          result: "test_file.csv"
+          reference: "test_reference_file_high_deviation.csv"
+          cli-options: "--exclude-fields field1"
+
+      - name: compare-selected-fields
+        uses: dglaeser/action-field-compare@95a036b3da8167d1fe5289d0125c41c72978de16
+        with:
+          result: "test_file.csv"
+          reference: "test_reference_file_high_deviation.csv"
+          cli-options: "--include-fields field2 --include-fields field3"
+
       - name: prepare-test-folders
         run: |
           mkdir test_data && cp test_file.csv test_data
