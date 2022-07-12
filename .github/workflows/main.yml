@@ -13,19 +13,35 @@ jobs:
           echo "1e-12,1.0,2.0" >> test_reference_file.csv
           echo "field1,field2,field3" > test_reference_file_high_deviation.csv
           echo "1e-3,1.0,2.0" >> test_reference_file_high_deviation.csv
+          echo "field1,field2" > test_reference_file_missing_field.csv
+          echo "1e-12,1.0" >> test_reference_file_missing_field.csv
 
       - name: compare-test-files
-        uses: dglaeser/action-field-compare@142227fc3744d78caf9e05e95465ed9dac05871f
+        uses: dglaeser/action-field-compare@95a036b3da8167d1fe5289d0125c41c72978de16
         with:
           result: "test_file.csv"
           reference: "test_reference_file.csv"
 
       - name: compare-with-high-tolerance
-        uses: dglaeser/action-field-compare@142227fc3744d78caf9e05e95465ed9dac05871f
+        uses: dglaeser/action-field-compare@95a036b3da8167d1fe5289d0125c41c72978de16
         with:
           result: "test_file.csv"
           reference: "test_reference_file_high_deviation.csv"
-          tolerance-options: "-rtol 1e-2 -atol 1e-2"
+          cli-options: "-rtol 1e-2 -atol 1e-2"
+
+      - name: compare-with-ignoring-missing-reference-field
+        uses: dglaeser/action-field-compare@95a036b3da8167d1fe5289d0125c41c72978de16
+        with:
+          result: "test_file.csv"
+          reference: "test_reference_file_missing_field.csv"
+          cli-options: "--ignore-missing-reference-fields"
+
+      - name: compare-with-ignoring-missing-results-field
+        uses: dglaeser/action-field-compare@95a036b3da8167d1fe5289d0125c41c72978de16
+        with:
+          result: "test_reference_file_missing_field.csv"
+          reference: "test_file.csv"
+          cli-options: "--ignore-missing-result-fields"
 
       - name: prepare-test-folders
         run: |
@@ -33,14 +49,14 @@ jobs:
           mkdir reference_data && cp test_reference_file_high_deviation.csv reference_data/test_file.csv
 
       - name: compare-folders
-        uses: dglaeser/action-field-compare@142227fc3744d78caf9e05e95465ed9dac05871f
+        uses: dglaeser/action-field-compare@95a036b3da8167d1fe5289d0125c41c72978de16
         with:
           result: "test_data"
           reference: "test_data"
 
       - name: compare-folders-with-high-tolerance
-        uses: dglaeser/action-field-compare@142227fc3744d78caf9e05e95465ed9dac05871f
+        uses: dglaeser/action-field-compare@95a036b3da8167d1fe5289d0125c41c72978de16
         with:
           result: "test_data"
           reference: "reference_data"
-          tolerance-options: "-rtol 1e-2 -atol 1e-2"
+          cli-options: "-rtol 1e-2 -atol 1e-2"
